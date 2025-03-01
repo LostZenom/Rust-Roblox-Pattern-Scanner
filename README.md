@@ -67,3 +67,5 @@ Performance Considerations
 Memory Scan Speed: Scanning large regions (e.g., hundreds of MB) can take time. The code tracks and reports scan duration.
 
 Optimization: Sliding window iteration (checking every byte) is computationally intensive but necessary for thoroughness.
+
+https://github.com/user-attachments/assets/68edfde2-c680-47b6-bc21-741515b81f5e
