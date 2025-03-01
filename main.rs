@@ -72,7 +72,7 @@ fn find_roblox_clients() -> Option<ProcessInfo> {
 }
 
 /// This function scans all memory regions of the target process (starting at the given base address)
-/// and uses a simple heuristic to “extract” candidate patterns. In this example, if a byte equals 0x55,
+/// and uses a simple heuristic to “extract” candidate patterns. example, if a byte equals 0x55,
 /// we capture the next 16 bytes as a candidate pattern.
 /// (You can adjust the heuristic and the pattern length as needed.)
 fn auto_extract_patterns(process_handle: HANDLE, base_address: usize) -> Vec<(usize, Vec<u8>)> {
@@ -80,7 +80,7 @@ fn auto_extract_patterns(process_handle: HANDLE, base_address: usize) -> Vec<(us
     let mut address = base_address;
     unsafe {
         let mut mem_info = MEMORY_BASIC_INFORMATION::default();
-        // Loop over memory regions using VirtualQueryEx
+        // Loops over memory regions using VirtualQueryEx
         while VirtualQueryEx(
             process_handle,
             Some(address as *const _),
@@ -102,7 +102,6 @@ fn auto_extract_patterns(process_handle: HANDLE, base_address: usize) -> Vec<(us
                     Some(&mut bytes_read),
                 ).is_ok() && bytes_read > 0 {
                     let read_size = bytes_read as usize;
-                    // Iterate over the region with a sliding window.
                     for i in 0..read_size.saturating_sub(16) {
                         // Simple heuristic: if the current byte equals 0x55 (a common function prologue opcode on x86),
                         // then capture the next 16 bytes as a candidate pattern.
